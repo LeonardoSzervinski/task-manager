@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Task Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
+        .task-card {
+            border-radius: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">Task Manager</a>
+            <div>
+                <a href="/logout" class="btn btn-outline-light">Sair</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-4">
+        <h3 class="mb-4">Minhas Tarefas</h3>
+        <form method="POST" class="row g-3 mb-4">
+            <div class="col-sm-10">
+                <input class="form-control" type="text" name="title" placeholder="Digite uma nova tarefa" required>
+            </div>
+            <div class="col-sm-2 d-grid">
+                <button class="btn btn-primary">Adicionar</button>
+            </div>
+        </form>
+
+        <div class="row g-3">
+            {% for task in tasks %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card task-card shadow-sm p-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>{{ task.title }}</span>
+                            <a href="/delete/{{ task.id }}" class="btn btn-sm btn-danger">Excluir</a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p class="text-muted">Nenhuma tarefa cadastrada.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
